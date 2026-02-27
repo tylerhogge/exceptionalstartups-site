@@ -11,13 +11,15 @@
   <meta property="og:description" content="An annual list of the fastest-growing, exceptional VC-backed startups in the US. Curated from top venture capital firms to help you find the best company to join.">
   <meta property="og:url" content="https://exceptionalstartups.com">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://exceptionalstartups.com/images/favicon.svg">
+  <meta property="og:image" content="https://exceptionalstartups.com/images/og-image.png">
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Exceptional Startups — The Best Startups to Join">
   <meta name="twitter:description" content="An annual list of the fastest-growing, exceptional VC-backed startups in the US. Curated from top venture capital firms to help you find the best company to join.">
   <meta name="twitter:site" content="@thogge">
+  <meta name="twitter:image" content="https://exceptionalstartups.com/images/og-image.png">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/images/favicon.ico" sizes="any">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
@@ -43,6 +45,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
+      position: relative;
       background: var(--lime);
       border-bottom: none;
       display: flex;
@@ -346,6 +349,56 @@
       font-weight: 700;
     }
     .announcement-bar a:hover { text-decoration: underline; }
+
+    /* ── HAMBURGER MOBILE NAV ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--black);
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+    .nav-links.open {
+      display: flex !important;
+    }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--lime);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px 24px 24px;
+        gap: 16px;
+        border-bottom: 2px solid rgba(0,0,0,0.1);
+        z-index: 200;
+      }
+      .nav-links li { width: 100%; }
+      .dropdown-menu {
+        position: static;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+        padding: 4px 0 0 12px;
+        display: block !important;
+      }
+      .dropdown-menu a { font-size: 0.9rem; opacity: 0.8; }
+    }
   </style>
 </head>
 <body>
@@ -360,6 +413,9 @@
     <a class="nav-logo" href="/">
       <img src="/images/favicon.svg" alt="Exceptional Startups" style="width:36px;height:36px;">
     </a>
+    <button class="hamburger" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
     <ul class="nav-links">
       <li><a href="/">Home</a></li>
       <li class="dropdown">
