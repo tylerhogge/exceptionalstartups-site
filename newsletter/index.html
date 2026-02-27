@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newsletter — Exceptional Startups</title>
+  <link rel="icon" href="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/f5d31cea-f092-4c08-80a2-26e82cddf835/startup.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,700;0,800;0,900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --lime: hsl(67.39deg, 95.83%, 71.76%);
+      --lime-light: hsl(70, 40%, 94.12%);
+      --black: #000;
+      --white: #fff;
+      --font: 'Barlow', sans-serif;
+    }
+    body { font-family: var(--font); color: var(--black); background: var(--white); }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white); border-bottom: 1px solid #eee;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 40px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--black); }
+    .nav-logo img { width: 36px; height: 36px; object-fit: contain; }
+    .nav-logo span { font-weight: 700; font-size: 1rem; letter-spacing: 0.02em; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--black); font-weight: 500; font-size: 0.9rem; letter-spacing: 0.04em; }
+    .nav-links a:hover { opacity: 0.6; }
+    .dropdown { position: relative; }
+    .dropdown-toggle { cursor: pointer; user-select: none; display: flex; align-items: center; gap: 4px; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.04em; }
+    .dropdown-toggle::after { content: '▾'; font-size: 0.75rem; }
+    .dropdown-menu { display: none; position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: var(--white); border: 1px solid #eee; border-radius: 4px; min-width: 130px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); padding: 8px 0; }
+    .dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu a { display: block; padding: 8px 16px; white-space: nowrap; font-size: 0.88rem; }
+    .dropdown-menu a:hover { background: var(--lime-light); }
+
+    /* NEWSLETTER PAGE */
+    .newsletter-page {
+      min-height: calc(100vh - 65px);
+      background: var(--lime);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 40px;
+    }
+    .newsletter-box {
+      max-width: 560px;
+      width: 100%;
+    }
+    .newsletter-box h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .newsletter-box p {
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 36px;
+      line-height: 1.6;
+      opacity: 0.8;
+    }
+    .newsletter-box form {
+      display: flex;
+      gap: 0;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .newsletter-box input[type="email"] {
+      flex: 1;
+      padding: 16px 22px;
+      border: none;
+      font-family: var(--font);
+      font-size: 1rem;
+      outline: none;
+    }
+    .newsletter-box button {
+      padding: 16px 28px;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .newsletter-box button:hover { opacity: 0.75; }
+    .success-msg { display: none; font-size: 1.2rem; font-weight: 700; margin-top: 20px; }
+
+    footer { background: var(--black); color: var(--white); text-align: center; padding: 24px 40px; font-size: 0.8rem; }
+    footer a { color: var(--lime); text-decoration: none; }
+
+    @media (max-width: 768px) {
+      nav { padding: 12px 20px; }
+      .newsletter-page { padding: 60px 24px; }
+      .newsletter-box form { flex-direction: column; }
+      .newsletter-box button { border-radius: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/f5d31cea-f092-4c08-80a2-26e82cddf835/startup.png" alt="Exceptional Startups logo">
+      <span>Exceptional Startups</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li class="dropdown">
+        <span class="dropdown-toggle">List</span>
+        <div class="dropdown-menu">
+          <a href="/list-2025/">2025 List</a>
+          <a href="/list-2024/">2024 List</a>
+        </div>
+      </li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/newsletter/">Newsletter</a></li>
+    </ul>
+  </nav>
+
+  <section class="newsletter-page">
+    <div class="newsletter-box">
+      <h1>Subscribe</h1>
+      <p>Interested in getting hired by an exceptional startup? Enter your email.</p>
+      <!--
+        ⚠️ ACTION REQUIRED: Replace this form with your email provider's embed code.
+        - Mailchimp: use their embedded form HTML
+        - Beehiiv: use their embed code
+        - Kit (ConvertKit): use their form embed
+        Or update the onsubmit handler below to POST to your email API.
+      -->
+      <form id="newsletter-form" onsubmit="handleSignup(event)">
+        <input type="email" name="email" placeholder="Email Address" required>
+        <button type="submit">Sign Up</button>
+      </form>
+      <p class="success-msg" id="success-msg">Thank you!</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Exceptional Startups · Questions? DM <a href="https://twitter.com/thogge" target="_blank">@thogge</a></p>
+  </footer>
+
+  <script>
+    function handleSignup(e) {
+      e.preventDefault();
+      // ⚠️ Replace with your email provider's API call
+      document.getElementById('newsletter-form').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>

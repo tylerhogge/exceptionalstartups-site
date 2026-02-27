@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Exceptional Startups</title>
+  <link rel="icon" href="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/f5d31cea-f092-4c08-80a2-26e82cddf835/startup.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,700;0,800;0,900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --lime: hsl(67.39deg, 95.83%, 71.76%);
+      --lime-light: hsl(70, 40%, 94.12%);
+      --black: #000;
+      --white: #fff;
+      --font: 'Barlow', sans-serif;
+    }
+    body { font-family: var(--font); color: var(--black); background: var(--white); }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--white); border-bottom: 1px solid #eee;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 40px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--black); }
+    .nav-logo img { width: 36px; height: 36px; object-fit: contain; }
+    .nav-logo span { font-weight: 700; font-size: 1rem; letter-spacing: 0.02em; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--black); font-weight: 500; font-size: 0.9rem; letter-spacing: 0.04em; }
+    .nav-links a:hover { opacity: 0.6; }
+    .dropdown { position: relative; }
+    .dropdown-toggle { cursor: pointer; user-select: none; display: flex; align-items: center; gap: 4px; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.04em; }
+    .dropdown-toggle::after { content: '▾'; font-size: 0.75rem; }
+    .dropdown-menu { display: none; position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: var(--white); border: 1px solid #eee; border-radius: 4px; min-width: 130px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); padding: 8px 0; }
+    .dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu a { display: block; padding: 8px 16px; white-space: nowrap; font-size: 0.88rem; }
+    .dropdown-menu a:hover { background: var(--lime-light); }
+
+    /* ABOUT CONTENT */
+    .about-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 40px 100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .about-text h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+    }
+    .about-text p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      font-weight: 400;
+      margin-bottom: 20px;
+      opacity: 0.85;
+    }
+    .about-text ul {
+      list-style: none;
+      margin: 20px 0;
+      padding: 0;
+    }
+    .about-text ul li {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      font-weight: 500;
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+    .about-text ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+    }
+    .about-text .dm-link {
+      display: inline-block;
+      margin-top: 16px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 2px solid var(--lime);
+      padding-bottom: 2px;
+    }
+    .about-text .dm-link:hover { background: var(--lime); }
+
+    .about-accent {
+      background: var(--lime);
+      border-radius: 8px;
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .about-accent h2 {
+      font-size: 1.1rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .criteria-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .criteria-num {
+      font-size: 2rem;
+      font-weight: 900;
+      line-height: 1;
+      opacity: 0.3;
+      min-width: 32px;
+    }
+    .criteria-text {
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5;
+      padding-top: 4px;
+    }
+
+    footer { background: var(--black); color: var(--white); text-align: center; padding: 24px 40px; font-size: 0.8rem; }
+    footer a { color: var(--lime); text-decoration: none; }
+
+    @media (max-width: 768px) {
+      nav { padding: 12px 20px; }
+      .about-wrapper { grid-template-columns: 1fr; gap: 40px; padding: 40px 20px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="/">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/f5d31cea-f092-4c08-80a2-26e82cddf835/startup.png" alt="Exceptional Startups logo">
+      <span>Exceptional Startups</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li class="dropdown">
+        <span class="dropdown-toggle">List</span>
+        <div class="dropdown-menu">
+          <a href="/list-2025/">2025 List</a>
+          <a href="/list-2024/">2024 List</a>
+        </div>
+      </li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/newsletter/">Newsletter</a></li>
+    </ul>
+  </nav>
+
+  <div class="about-wrapper">
+    <div class="about-text">
+      <h1>Which company should I join?</h1>
+      <p>The most important career advice is that your choice of company matters more than your title, your geography, or even your compensation.</p>
+      <p>Here's the problem: there are very few exceptional companies (by definition) and most people struggle to know how to identify them.</p>
+      <p>Every year, we'll post a list of exceptional startups across the US sourced from many of the top venture capitalists in the country.</p>
+      <p>Not on the list, but think you should be?</p>
+      <a class="dm-link" href="https://twitter.com/thogge" target="_blank">Send me a DM @thogge →</a>
+    </div>
+
+    <div class="about-accent">
+      <h2>To make the list, a company must have:</h2>
+      <div class="criteria-item">
+        <span class="criteria-num">1</span>
+        <span class="criteria-text">At least <strong>$5M in run-rate revenue</strong></span>
+      </div>
+      <div class="criteria-item">
+        <span class="criteria-num">2</span>
+        <span class="criteria-text">At least <strong>100% year-over-year growth</strong> (50% minimum if revenue is above $20M)</span>
+      </div>
+      <div class="criteria-item">
+        <span class="criteria-num">3</span>
+        <span class="criteria-text">Raised money from a <strong>vetted list of venture capital firms</strong> that we maintain</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Exceptional Startups · Questions? DM <a href="https://twitter.com/thogge" target="_blank">@thogge</a></p>
+  </footer>
+
+</body>
+</html>

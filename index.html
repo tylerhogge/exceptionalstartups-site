@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exceptional Startups</title>
+  <link rel="icon" href="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/f5d31cea-f092-4c08-80a2-26e82cddf835/startup.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --lime: hsl(67.39deg, 95.83%, 71.76%);
+      --lime-light: hsl(70, 40%, 94.12%);
+      --black: #000;
+      --white: #fff;
+      --font: 'Barlow', sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      color: var(--black);
+      background: var(--white);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 40px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--black);
+    }
+    .nav-logo img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+    .nav-logo span {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--black);
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+    }
+    .nav-links a:hover { opacity: 0.6; }
+
+    .dropdown { position: relative; }
+    .dropdown-toggle {
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+    }
+    .dropdown-toggle::after {
+      content: '▾';
+      font-size: 0.75rem;
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--white);
+      border: 1px solid #eee;
+      border-radius: 4px;
+      min-width: 130px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      padding: 8px 0;
+    }
+    .dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu a {
+      display: block;
+      padding: 8px 16px;
+      white-space: nowrap;
+      font-size: 0.88rem;
+    }
+    .dropdown-menu a:hover { background: var(--lime-light); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--lime);
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 40px;
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 7.5rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      max-width: 900px;
+    }
+    .hero h1 span {
+      display: block;
+      font-weight: 300;
+      font-size: clamp(1.4rem, 3.5vw, 3rem);
+      text-transform: none;
+      letter-spacing: 0.02em;
+      margin-bottom: 4px;
+    }
+    .btn-primary {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 14px 36px;
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.8; }
+
+    /* ── QUOTES ── */
+    .quotes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 0;
+      padding: 60px 40px;
+      background: var(--white);
+    }
+    .quote-card {
+      background: var(--lime-light);
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .quote-card:not(:last-child) {
+      border-right: 2px solid var(--white);
+    }
+    .quote-card blockquote {
+      font-size: 1.05rem;
+      font-weight: 400;
+      line-height: 1.6;
+      font-style: italic;
+    }
+    .quote-card blockquote::before { content: '\201C'; }
+    .quote-card blockquote::after  { content: '\201D'; }
+    .quote-card cite {
+      font-size: 0.85rem;
+      font-weight: 700;
+      font-style: normal;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── NEWSLETTER ── */
+    .newsletter {
+      background: var(--lime);
+      padding: 80px 40px;
+      text-align: center;
+    }
+    .newsletter h2 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    .newsletter p {
+      font-size: 1.05rem;
+      font-weight: 400;
+      margin-bottom: 32px;
+      opacity: 0.8;
+    }
+    .newsletter form {
+      display: flex;
+      gap: 0;
+      max-width: 480px;
+      margin: 0 auto;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    }
+    .newsletter input[type="email"] {
+      flex: 1;
+      padding: 14px 20px;
+      border: none;
+      font-family: var(--font);
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .newsletter button {
+      padding: 14px 28px;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .newsletter button:hover { opacity: 0.75; }
+    .newsletter .success-msg {
+      display: none;
+      margin-top: 16px;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    /* ── VC LOGOS ── */
+    .vc-section {
+      background: var(--white);
+      padding: 60px 40px 80px;
+    }
+    .vc-section h3 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: center;
+      margin-bottom: 40px;
+      opacity: 0.5;
+    }
+    .vc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 24px 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: center;
+      justify-items: center;
+    }
+    .vc-grid img {
+      max-width: 110px;
+      max-height: 50px;
+      width: 100%;
+      height: 50px;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.6;
+      transition: opacity 0.2s, filter 0.2s;
+    }
+    .vc-grid img:hover { opacity: 1; filter: grayscale(0%); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      color: var(--white);
+      text-align: center;
+      padding: 24px 40px;
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+    footer a { color: var(--lime); text-decoration: none; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 12px 20px; }
+      .nav-links { gap: 18px; }
+      .hero { padding: 60px 24px; }
+      .quotes { padding: 40px 20px; gap: 16px; grid-template-columns: 1fr; }
+      .quote-card:not(:last-child) { border-right: none; border-bottom: 2px solid var(--white); }
+      .newsletter { padding: 60px 24px; }
+      .newsletter form { flex-direction: column; border-radius: 4px; }
+      .vc-section { padding: 40px 20px 60px; }
+      .vc-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="/">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/f5d31cea-f092-4c08-80a2-26e82cddf835/startup.png" alt="Exceptional Startups logo">
+      <span>Exceptional Startups</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li class="dropdown">
+        <span class="dropdown-toggle">List</span>
+        <div class="dropdown-menu">
+          <a href="/list-2025/">2025 List</a>
+          <a href="/list-2024/">2024 List</a>
+        </div>
+      </li>
+      <li><a href="/about/">About</a></li>
+      <li><a href="/newsletter/">Newsletter</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>
+      <span>the 2025</span>
+      Exceptional<br>Startups List
+    </h1>
+    <a class="btn-primary" href="/list-2025/">See the list</a>
+  </section>
+
+  <!-- QUOTES -->
+  <section class="quotes">
+    <div class="quote-card">
+      <blockquote>Your choice of company is more important than your job title, your pay or your responsibilities.</blockquote>
+      <cite>Andy Rachleff, Founder / CEO Wealthfront</cite>
+    </div>
+    <div class="quote-card">
+      <blockquote>Your career is your business, and you are the CEO.</blockquote>
+      <cite>Andy Grove, Founder / CEO of Intel</cite>
+    </div>
+    <div class="quote-card">
+      <blockquote>If you join a company, my general advice is to join a company on a breakout trajectory.</blockquote>
+      <cite>Sam Altman, Founder / CEO of OpenAI</cite>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <h2>Subscribe</h2>
+    <p>Interested in getting hired by an exceptional startup? Enter your email.</p>
+    <!--
+      ⚠️ ACTION REQUIRED: Replace the form below with your email provider's embed code.
+      If you use Mailchimp, replace action="YOUR_MAILCHIMP_URL" with your list's form action URL.
+      If you use Beehiiv, Kit, etc., use their embed form code instead.
+    -->
+    <form id="newsletter-form" onsubmit="handleSignup(event)">
+      <input type="email" name="email" placeholder="Email Address" required>
+      <button type="submit">Sign Up</button>
+    </form>
+    <p class="success-msg" id="success-msg">Thank you!</p>
+  </section>
+
+  <!-- VC LOGOS -->
+  <section class="vc-section">
+    <h3>Sourced from many of the best venture capital firms including:</h3>
+    <div class="vc-grid">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/54ceb20d-f032-4524-a9e7-ed9a2054dbb7/Screenshot+2024-02-22+at+9.57.37+AM.png" alt="VC Firm">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/15fd606a-0b12-4c63-9151-bef9604b1e93/caanan.png" alt="Canaan">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/e4f05cfb-976b-4445-9ba5-124363316b28/benchmark.jpeg" alt="Benchmark">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/71186c9c-54d3-463e-8962-cf60d9864371/notable+vc.png" alt="Notable VC">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/45fb8811-fd6a-4f7e-8548-3e1765720dab/GP+logo.png" alt="General Partner">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/0d34b7f1-2f54-4fe5-a4f8-caf9e14a98d8/kv.png" alt="Khosla Ventures">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/e2da87ca-3c60-402b-9155-15b153ac2e97/QED+logo.png" alt="QED">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/ce6ca515-3496-4b73-b514-8a212ddd15be/caffeinated.png" alt="Caffeinated Capital">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/fcc387ab-f0f5-4cdb-bb1d-9d44adff6a6b/pelion.png" alt="Pelion">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/bdd5e587-fc93-4191-9ffe-e1712d8b771b/wing+logo.png" alt="Wing">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/64eaac20-aec4-449f-a845-457593a31515/felicis.png" alt="Felicis">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/8c8d2e7f-871a-44d4-b022-d454c0596622/KP+logo.png" alt="Kleiner Perkins">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/0e9dc959-4049-4cfe-8ea5-e06500d860b4/bedrock.png" alt="Bedrock">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/d93f85a0-69e5-49dc-a63a-f2ac599bc4d0/Screenshot+2025-02-11+at+8.14.48%E2%80%AFPM.png" alt="VC Firm">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/0b18aa19-7f34-46a0-878b-4c94128f4876/contrary+logo.png" alt="Contrary">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/7aed4e8a-e334-44c7-a34f-bf275e689f1b/homebrew.png" alt="Homebrew">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/6ffba181-daaf-4f32-bf37-bcc1bc77d321/exponentcap_logo.jpeg" alt="Exponent">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/b2f9677b-b4fe-4828-8c5d-2e1186d366eb/craft.png" alt="Craft Ventures">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/cc23b152-175c-4389-8889-abded15091b6/164_haystack_vc-logotype.png" alt="Haystack">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/5775b827-bf2d-4d41-82fe-e5608af36f21/tribe+capital.png" alt="Tribe Capital">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/ba402258-0688-4e5f-8d23-2c9c48d49102/fpv.jpeg" alt="FPV">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/0b60e1f1-dcf0-4205-9dce-f3e8c054b339/Bessemer_Logo.jpg" alt="Bessemer">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/e946fd82-aa9d-4e7f-a0fd-456a8edb716f/harpoon_ventures_portfolio_logo.jpeg" alt="Harpoon Ventures">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/ad8f5637-46dd-4c85-853f-43c7136b592b/matrix.png" alt="Matrix Partners">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/7c1225a2-8e8b-4d27-8b0d-1cc64546f6bd/645Ventures_logo_black+copy.jpg" alt="645 Ventures">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/5d2a20d0-481a-4f76-af85-72e9860b9346/btv.png" alt="BTV">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/f09fda3a-5f67-4cae-b98a-314a3ec2449f/gtm.png" alt="GTM Fund">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/4e44e306-7b37-4901-93bb-cd1662fac3b7/lightspeed.png" alt="Lightspeed">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/b507ac4f-0ed2-4874-ae71-7cd02284fb2c/redpoint.png" alt="Redpoint">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/0e4ab070-4044-40fa-879d-613d29462c64/susa.jpeg" alt="SUSA Ventures">
+      <img src="https://images.squarespace-cdn.com/content/v1/659495743dc28573a0e396fc/f6b75d0d-3829-44fb-ab5e-73c30db55496/audacious.jpeg" alt="Audacious">
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Exceptional Startups · Questions? DM <a href="https://twitter.com/thogge" target="_blank">@thogge</a></p>
+  </footer>
+
+  <script>
+    function handleSignup(e) {
+      e.preventDefault();
+      // ⚠️ Replace this function with your email provider's submission logic.
+      // For Mailchimp: submit to their form action URL via fetch/AJAX.
+      document.getElementById('newsletter-form').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
