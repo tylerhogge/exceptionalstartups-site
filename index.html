@@ -165,6 +165,22 @@
       transition: opacity 0.2s;
     }
     .btn-primary:hover { opacity: 0.8; }
+    .btn-secondary {
+      display: inline-block;
+      padding: 14px 36px;
+      background: transparent;
+      color: var(--black);
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      border: 2px solid var(--black);
+      transition: opacity 0.2s;
+    }
+    .btn-secondary:hover { opacity: 0.7; }
 
     /* ── QUOTES ── */
     .quotes {
@@ -354,7 +370,7 @@
         </div>
       </li>
       <li><a href="/about/">About</a></li>
-      <li><a href="/newsletter/">Newsletter</a></li>
+      <li><a href="/newsletter/">Get Notified</a></li>
     </ul>
   </nav>
 
@@ -364,7 +380,10 @@
       <span>the 2025</span>
       Exceptional<br>Startups List
     </h1>
-    <a class="btn-primary" href="/list-2025/">See the list</a>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:40px;">
+      <a class="btn-primary" href="/list-2025/" style="margin-top:0;">See the list</a>
+      <a class="btn-secondary" href="/newsletter/">Get notified</a>
+    </div>
   </section>
 
   <!-- QUOTES -->
