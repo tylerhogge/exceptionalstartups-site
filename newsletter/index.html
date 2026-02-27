@@ -157,9 +157,26 @@
   <script>
     function handleSignup(e) {
       e.preventDefault();
-      // ⚠️ Replace with your email provider's API call
-      document.getElementById('newsletter-form').style.display = 'none';
-      document.getElementById('success-msg').style.display = 'block';
+      const email = e.target.querySelector('input[type="email"]').value;
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: '91011f79-0b40-4cf9-8193-8231680aa0cc',
+          email: email,
+          subject: 'New Exceptional Startups subscriber: ' + email,
+          from_name: 'Exceptional Startups'
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('newsletter-form').style.display = 'none';
+        document.getElementById('success-msg').style.display = 'block';
+      })
+      .catch(() => {
+        document.getElementById('newsletter-form').style.display = 'none';
+        document.getElementById('success-msg').style.display = 'block';
+      });
     }
   </script>
 
