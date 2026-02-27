@@ -459,9 +459,8 @@
     function handleSignup(e) {
       e.preventDefault();
       const email = e.target.querySelector('input[type="email"]').value;
-      fetch('https://script.google.com/macros/s/AKfycbzkoHYqnIh4BzWJamonT6Hf_UBuWK9Zc2kNO_7aOx2pZ11rgu3fe7dTW47Pi-A3iH_I/exec', {
-        method: 'POST',
-        body: JSON.stringify({ email: email })
+      fetch('https://script.google.com/macros/s/AKfycbzkoHYqnIh4BzWJamonT6Hf_UBuWK9Zc2kNO_7aOx2pZ11rgu3fe7dTW47Pi-A3iH_I/exec?email=' + encodeURIComponent(email), {
+        mode: 'no-cors'
       })
       .then(res => res.json())
       .then(data => {
