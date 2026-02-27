@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="200" height="220">
+  <!-- Body -->
+  <ellipse cx="100" cy="100" rx="38" ry="60" fill="white" stroke="#222" stroke-width="4"/>
+  <!-- Nose cone -->
+  <path d="M100 22 C75 50 62 75 62 100 L138 100 C138 75 125 50 100 22Z" fill="white" stroke="#222" stroke-width="4"/>
+  <!-- Porthole -->
+  <circle cx="100" cy="95" r="18" fill="#5bcfcf" stroke="#222" stroke-width="4"/>
+  <circle cx="100" cy="95" r="10" fill="#7ee8e8"/>
+  <!-- Left fin -->
+  <path d="M62 130 L38 168 L62 155Z" fill="#e84040" stroke="#222" stroke-width="3"/>
+  <!-- Right fin -->
+  <path d="M138 130 L162 168 L138 155Z" fill="#e84040" stroke="#222" stroke-width="3"/>
+  <!-- Bottom -->
+  <path d="M62 150 Q100 165 138 150 L138 160 Q100 178 62 160Z" fill="#e84040" stroke="#222" stroke-width="3"/>
+  <!-- Flame -->
+  <ellipse cx="100" cy="178" rx="18" ry="24" fill="#ff9800" opacity="0.9"/>
+  <ellipse cx="100" cy="182" rx="10" ry="16" fill="#ffeb3b"/>
+  <!-- Speed lines -->
+  <line x1="52" y1="148" x2="20" y2="175" stroke="#222" stroke-width="4" stroke-linecap="round"/>
+  <line x1="44" y1="162" x2="18" y2="185" stroke="#222" stroke-width="3" stroke-linecap="round"/>
+  <line x1="60" y1="170" x2="34" y2="194" stroke="#222" stroke-width="3" stroke-linecap="round"/>
+</svg>
