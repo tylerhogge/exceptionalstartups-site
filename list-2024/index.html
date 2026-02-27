@@ -41,9 +41,7 @@
 
     .list-hero {
       background: var(--lime);
-      padding: 80px 60px;
-      clip-path: ellipse(100% 88% at 50% 0%);
-      margin-bottom: -40px;
+      padding: 60px 60px 60px;
     }
     .list-hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; margin-bottom: 24px; }
     .stats { display: flex; flex-wrap: wrap; gap: 12px 0; flex-direction: column; max-width: 600px; }
@@ -52,7 +50,7 @@
     .cta-note { margin-top: 24px; font-size: 0.95rem; font-weight: 400; opacity: 0.7; }
     .cta-note a { color: var(--black); }
 
-    .list-content { padding: 60px 0 0; background: var(--white); }
+    .list-content { padding: 0; background: var(--white); }
     .list-content iframe { width: 100%; min-height: 800px; border: none; display: block; }
 
     footer { background: var(--black); color: var(--white); text-align: center; padding: 24px 40px; font-size: 0.8rem; }
@@ -60,7 +58,7 @@
 
     @media (max-width: 768px) {
       nav { padding: 12px 20px; }
-      .list-hero { padding: 60px 24px; clip-path: none; margin-bottom: 0; }
+      .list-hero { padding: 40px 24px; }
     }
   </style>
 </head>
