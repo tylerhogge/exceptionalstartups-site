@@ -32,7 +32,8 @@
       --white: #fff;
       --font: 'Barlow', sans-serif;
     }
-    body { font-family: var(--font); color: var(--black); background: var(--white); }
+    body {
+      overflow-x: hidden; font-family: var(--font); color: var(--black); background: var(--white); }
 
     nav {
       position: sticky; top: 0; z-index: 100;
@@ -219,12 +220,13 @@
       .dropdown-menu a { font-size: 0.9rem; opacity: 0.8; }
     }
   </style>
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
   <!-- ANNOUNCEMENT BANNER -->
   <div class="announcement-bar">
-    🚀 The 2026 Exceptional Startups List is coming soon — <a href="/newsletter/">subscribe to be notified</a>
+    🚀 The <strong>2026 Exceptional Startups List</strong> is here — <a href="/list-2026/">see the newest list</a>
   </div>
 
   <nav>
@@ -239,6 +241,7 @@
       <li class="dropdown">
         <span class="dropdown-toggle">List</span>
         <div class="dropdown-menu">
+          <a href="/list-2026/">2026 List</a>
           <a href="/list-2025/">2025 List</a>
           <a href="/list-2024/">2024 List</a>
         </div>
@@ -259,14 +262,14 @@
     </div>
 
     <div class="about-accent">
-      <h2>To make the list, a company must have:</h2>
+      <h2>To make the list in 2026, the bar has been raised. A company must have:</h2>
       <div class="criteria-item">
         <span class="criteria-num">1</span>
         <span class="criteria-text">At least <strong>$5M in run-rate revenue</strong></span>
       </div>
       <div class="criteria-item">
         <span class="criteria-num">2</span>
-        <span class="criteria-text">At least <strong>100% year-over-year growth</strong> (50% minimum if revenue is above $20M)</span>
+        <span class="criteria-text">Growing at least <strong>3x (200%) year over year</strong>, or <strong>2x (100%)</strong> if you are above $50M in revenue</span>
       </div>
       <div class="criteria-item">
         <span class="criteria-num">3</span>

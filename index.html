@@ -38,7 +38,9 @@
       font-family: var(--font);
       color: var(--black);
       background: var(--white);
+      overflow-x: hidden;
     }
+    html { overflow-x: hidden; }
 
     /* ── NAV ── */
     nav {
@@ -188,9 +190,10 @@
     /* ── QUOTES ── */
     .quotes {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 0;
+      grid-template-columns: repeat(3, minmax(0, 260px));
+      gap: 32px;
       padding: 60px 40px;
+      justify-content: center;
       background: var(--white);
     }
     .quote-card {
@@ -202,7 +205,7 @@
       gap: 24px;
     }
     .quote-card:not(:last-child) {
-      border-right: 2px solid var(--white);
+      border-right: none;
     }
     .quote-card blockquote {
       font-size: 1.05rem;
@@ -305,7 +308,7 @@
       width: 100%;
       height: 70px;
       object-fit: contain;
-      transition: opacity 0.2s;
+      transition: opacity 0.2s, transform 0.2s;
     }
     .vc-grid img:hover { opacity: 0.75; }
 
@@ -400,13 +403,14 @@
       .dropdown-menu a { font-size: 0.9rem; opacity: 0.8; }
     }
   </style>
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
   <!-- NAV -->
   <!-- ANNOUNCEMENT BANNER -->
   <div class="announcement-bar">
-    🚀 The 2026 Exceptional Startups List is coming soon — <a href="/newsletter/">subscribe to be notified</a>
+    🚀 The <strong>2026 Exceptional Startups List</strong> is here — <a href="/list-2026/">see the newest list</a>
   </div>
 
   <nav>
@@ -421,6 +425,7 @@
       <li class="dropdown">
         <span class="dropdown-toggle">List</span>
         <div class="dropdown-menu">
+          <a href="/list-2026/">2026 List</a>
           <a href="/list-2025/">2025 List</a>
           <a href="/list-2024/">2024 List</a>
         </div>
@@ -433,11 +438,10 @@
   <!-- HERO -->
   <section class="hero">
     <h1>
-      <span>the 2025</span>
       Exceptional<br>Startups List
     </h1>
     <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:40px;">
-      <a class="btn-primary" href="/list-2025/" style="margin-top:0;">See the list</a>
+      <a class="btn-primary" href="/list-2026/" style="margin-top:0;">See the list</a>
       <a class="btn-secondary" href="/newsletter/">Get notified</a>
     </div>
   </section>
@@ -543,6 +547,24 @@
       document.querySelectorAll('.dropdown-menu').forEach(function(m) {
         m.classList.remove('open');
       });
+    });
+
+    // Targeted scale boosts only for logos that appear visually small
+    var LOGO_BOOSTS = {
+      'Pelion': 1.9,
+      'Tribe Capital': 1.8,
+      'Pathlight Ventures': 1.7,
+      'Harpoon Ventures': 1.6,
+      'BTV': 1.6,
+      'Lightspeed': 1.5,
+      'Redpoint': 1.5,
+      'Khosla Ventures': 1.4
+    };
+    document.querySelectorAll('.vc-grid img').forEach(function(img) {
+      var scale = LOGO_BOOSTS[img.getAttribute('alt')];
+      if (!scale) return;
+      function apply() { img.style.transform = 'scale(' + scale + ')'; }
+      if (img.complete) { apply(); } else { img.addEventListener('load', apply); }
     });
   </script>
 </body>

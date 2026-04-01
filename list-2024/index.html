@@ -4,18 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2024 Exceptional Startups List — Top Startups to Join</title>
-  <meta name="description" content="130+ exceptional VC-backed startups with 100%+ growth, sourced from 20+ leading venture capital firms. The best startups to join in 2024.">
+  <meta name="description" content="The 2024 list of exceptional VC-backed startups with 100%+ growth, sourced from top venture capital firms. Find the best startup to join in 2024.">
   <meta name="robots" content="index, follow">
-  <!-- Open Graph -->
   <meta property="og:title" content="2024 Exceptional Startups List">
-  <meta property="og:description" content="130+ exceptional VC-backed startups with 100%+ growth, sourced from 20+ leading venture capital firms. The best startups to join in 2024.">
-  <meta property="og:url" content="https://exceptionalstartups.com">
+  <meta property="og:description" content="The 2024 list of exceptional VC-backed startups with 100%+ growth, sourced from top venture capital firms. Find the best startup to join in 2024.">
+  <meta property="og:url" content="https://exceptionalstartups.com/list-2024/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://exceptionalstartups.com/images/og-image.png">
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="2024 Exceptional Startups List">
-  <meta name="twitter:description" content="130+ exceptional VC-backed startups with 100%+ growth, sourced from 20+ leading venture capital firms. The best startups to join in 2024.">
+  <meta name="twitter:description" content="The 2024 list of exceptional VC-backed startups with 100%+ growth, sourced from top venture capital firms. Find the best startup to join in 2024.">
   <meta name="twitter:site" content="@thogge">
   <meta name="twitter:image" content="https://exceptionalstartups.com/images/og-image.png">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
@@ -30,131 +28,314 @@
       --lime-light: hsl(70, 40%, 94.12%);
       --black: #000;
       --white: #fff;
+      --gray: #6b7280;
+      --bg: #f2f1ec;
       --font: 'Barlow', sans-serif;
     }
-    body { font-family: var(--font); color: var(--black); background: var(--white); }
+    body {
+      overflow-x: hidden; font-family: var(--font); color: var(--black); background: var(--bg); }
 
+    /* ANNOUNCEMENT */
+    .announcement-bar {
+      background: var(--black); color: var(--white);
+      text-align: center; padding: 10px 20px;
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.02em;
+    }
+    .announcement-bar a { color: var(--lime); text-decoration: none; font-weight: 700; }
+    .announcement-bar a:hover { text-decoration: underline; }
+
+    /* NAV */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: var(--lime); border-bottom: none;
+      background: var(--lime);
       display: flex; align-items: center; justify-content: space-between;
       padding: 14px 40px;
     }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--black); }
     .nav-logo img { width: 36px; height: 36px; object-fit: contain; }
-    .nav-logo span { font-weight: 700; font-size: 1rem; letter-spacing: 0.02em; }
     .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
     .nav-links a { text-decoration: none; color: var(--black); font-weight: 500; font-size: 0.9rem; letter-spacing: 0.04em; }
     .nav-links a:hover { opacity: 0.6; }
     .dropdown { position: relative; }
     .dropdown-toggle { cursor: pointer; user-select: none; display: flex; align-items: center; gap: 4px; font-weight: 500; font-size: 0.9rem; letter-spacing: 0.04em; }
     .dropdown-toggle::after { content: '▾'; font-size: 0.75rem; }
-    .dropdown-menu { display: none; position: absolute; top: 100%; margin-top: 0; border-top: 3px solid var(--black); left: 50%; transform: translateX(-50%); background: var(--white); border: 1px solid #eee; border-radius: 4px; min-width: 130px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); padding: 8px 0; }
+    .dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: var(--white); border: 1px solid #eee; border-radius: 4px; min-width: 130px; box-shadow: 0 4px 16px rgba(0,0,0,0.1); padding: 8px 0; z-index: 200; }
     .dropdown-menu.open { display: block; }
     .dropdown:hover .dropdown-menu { display: block; }
-    .dropdown-menu a { display: block; padding: 8px 16px; white-space: nowrap; font-size: 0.88rem; }
+    .dropdown-menu a { display: block; padding: 8px 16px; white-space: nowrap; font-size: 0.88rem; text-decoration: none; color: var(--black); }
     .dropdown-menu a:hover { background: var(--lime-light); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--black); border-radius: 2px; }
 
+    /* HERO */
     .list-hero {
       background: var(--lime);
-      padding: 60px 60px 60px;
+      padding: 60px 60px 70px;
     }
-    .list-hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; margin-bottom: 24px; }
-    .stats { display: flex; flex-wrap: wrap; gap: 12px 0; flex-direction: column; max-width: 600px; }
+    .list-hero h1 { font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; margin-bottom: 28px; line-height: 1.05; }
+    .stats { display: flex; flex-direction: column; gap: 6px; max-width: 620px; }
     .stats p { font-size: 1rem; font-weight: 500; line-height: 1.5; }
     .stats p strong { font-weight: 800; }
-    .cta-note { margin-top: 24px; font-size: 0.95rem; font-weight: 400; opacity: 0.7; }
+    .cta-note { margin-top: 24px; font-size: 0.95rem; opacity: 0.65; }
     .cta-note a { color: var(--black); }
 
-    .list-content { padding: 0; background: var(--white); }
-    .list-content iframe { width: 100%; min-height: 800px; border: none; display: block; }
+    /* LIST SECTION */
+    .list-section { padding: 40px 40px 60px; }
 
+    .list-header { margin-bottom: 24px; }
+    .list-header h2 { font-size: 1.8rem; font-weight: 800; margin-bottom: 20px; }
+
+    .search-wrap { position: relative; margin-bottom: 16px; }
+    .search-wrap svg { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #9ca3af; pointer-events: none; }
+    #search-input {
+      width: 100%; padding: 14px 16px 14px 46px;
+      border: 1.5px solid #e5e7eb; border-radius: 50px;
+      font-family: var(--font); font-size: 1rem; background: var(--white);
+      outline: none; transition: border-color 0.2s;
+    }
+    #search-input:focus { border-color: var(--black); }
+
+    .filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+    .filter-select {
+      padding: 8px 32px 8px 14px;
+      border: 1.5px solid #d1d5db; border-radius: 50px;
+      font-family: var(--font); font-size: 0.88rem; font-weight: 500;
+      background: var(--white); cursor: pointer; outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      transition: border-color 0.2s;
+    }
+    .filter-select:focus { border-color: var(--black); }
+
+    .result-count { font-size: 0.9rem; color: var(--gray); margin-bottom: 20px; }
+
+    /* CARDS */
+    .cards-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .company-card {
+      background: var(--white); border-radius: 12px;
+      padding: 20px 24px;
+      display: flex; align-items: center; gap: 20px;
+      cursor: pointer;
+      transition: box-shadow 0.15s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .company-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+
+    .card-logo {
+      width: 60px; height: 60px; flex-shrink: 0;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      background: #f3f4f6;
+    }
+    .card-logo img { width: 100%; height: 100%; object-fit: contain; }
+    .card-logo .logo-fallback {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; font-weight: 800; color: var(--white);
+    }
+
+    .card-body { flex: 1; min-width: 0; }
+    .card-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+    .card-meta { font-size: 0.85rem; color: var(--gray); margin-bottom: 8px; }
+    .card-desc {
+      font-size: 0.9rem; line-height: 1.55; color: #374151;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+
+    .card-action { flex-shrink: 0; }
+    .raise-hand-btn {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 18px;
+      background: #0f172a; color: var(--white);
+      border: none; border-radius: 8px;
+      font-family: var(--font); font-size: 0.88rem; font-weight: 600;
+      cursor: pointer; white-space: nowrap;
+      transition: background 0.15s;
+    }
+    .raise-hand-btn:hover { background: #1e293b; }
+    @keyframes wave {
+      0%   { transform: rotate(0deg); }
+      15%  { transform: rotate(20deg); }
+      30%  { transform: rotate(-10deg); }
+      45%  { transform: rotate(18deg); }
+      60%  { transform: rotate(-8deg); }
+      75%  { transform: rotate(14deg); }
+      100% { transform: rotate(0deg); }
+    }
+    .raise-hand-btn .hand-emoji {
+      display: inline-block;
+      transform-origin: 70% 80%;
+      transition: transform 0.1s;
+    }
+    .raise-hand-btn:hover .hand-emoji {
+      animation: wave 0.8s ease-in-out;
+    }
+
+    /* LOADING */
+    .loading-wrap {
+      text-align: center; padding: 60px 20px;
+    }
+    .loading-spinner {
+      width: 40px; height: 40px; border: 4px solid #e5e7eb;
+      border-top-color: var(--black); border-radius: 50%;
+      animation: spin 0.8s linear infinite; margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text { color: var(--gray); font-size: 0.95rem; }
+    .error-text { color: #ef4444; font-size: 0.95rem; text-align: center; padding: 60px 20px; }
+
+    /* MODALS */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.6); z-index: 1000;
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: var(--white); border-radius: 16px;
+      width: 100%; max-width: 540px; max-height: 90vh;
+      overflow-y: auto; padding: 32px;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      background: none; border: none; cursor: pointer;
+      font-size: 1.4rem; color: #6b7280; line-height: 1;
+      padding: 4px;
+    }
+    .modal-close:hover { color: var(--black); }
+
+    /* Detail modal */
+    .detail-logo {
+      width: 72px; height: 72px; border-radius: 10px;
+      overflow: hidden; background: #f3f4f6;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+    }
+    .detail-logo img { width: 100%; height: 100%; object-fit: contain; }
+    .detail-logo .logo-fallback {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem; font-weight: 800; color: var(--white);
+    }
+    .detail-name { font-size: 1.5rem; font-weight: 800; margin-bottom: 6px; }
+    .detail-meta { font-size: 0.9rem; color: var(--gray); margin-bottom: 16px; }
+    .detail-desc { font-size: 0.95rem; line-height: 1.65; color: #374151; margin-bottom: 20px; }
+    .detail-links { display: flex; gap: 12px; flex-wrap: wrap; }
+    .detail-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--black); font-weight: 600; font-size: 0.9rem;
+      text-decoration: none; border-bottom: 2px solid var(--black);
+      padding-bottom: 1px;
+    }
+    .detail-link:hover { opacity: 0.6; }
+    .modal-close-btn {
+      width: 100%; margin-top: 24px; padding: 14px;
+      background: #0f172a; color: var(--white);
+      border: none; border-radius: 8px;
+      font-family: var(--font); font-size: 1rem; font-weight: 600;
+      cursor: pointer;
+    }
+    .modal-close-btn:hover { background: #1e293b; }
+
+    /* Raise Hand modal */
+    .rh-header { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+    .rh-logo {
+      width: 48px; height: 48px; border-radius: 8px;
+      overflow: hidden; background: #f3f4f6;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .rh-logo img { width: 100%; height: 100%; object-fit: contain; }
+    .rh-logo .logo-fallback {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; font-weight: 800; color: var(--white);
+    }
+    .rh-title { font-size: 1.2rem; font-weight: 800; }
+
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 6px; }
+    .form-group input, .form-group textarea {
+      width: 100%; padding: 10px 14px;
+      border: 1.5px solid #d1d5db; border-radius: 8px;
+      font-family: var(--font); font-size: 0.95rem;
+      outline: none; transition: border-color 0.2s;
+      background: var(--white);
+    }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--black); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .required-star { color: #ef4444; }
+
+    .form-actions { display: flex; gap: 12px; margin-top: 20px; }
+    .btn-cancel {
+      flex: 1; padding: 12px;
+      background: transparent; border: 1.5px solid #d1d5db; border-radius: 8px;
+      font-family: var(--font); font-size: 0.95rem; font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-cancel:hover { border-color: var(--black); }
+    .btn-submit {
+      flex: 2; padding: 12px;
+      background: #0f172a; color: var(--white);
+      border: none; border-radius: 8px;
+      font-family: var(--font); font-size: 0.95rem; font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-submit:hover { background: #1e293b; }
+    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .form-success {
+      text-align: center; padding: 20px 0;
+      display: none;
+    }
+    .form-success .success-icon { font-size: 2.5rem; margin-bottom: 12px; }
+    .form-success h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; }
+    .form-success p { color: var(--gray); font-size: 0.95rem; }
+
+    /* FOOTER */
     footer { background: var(--black); color: var(--white); text-align: center; padding: 24px 40px; font-size: 0.8rem; }
     footer a { color: var(--lime); text-decoration: none; }
 
+    /* MOBILE */
     @media (max-width: 768px) {
       nav { padding: 12px 20px; }
-      .list-hero { padding: 40px 24px; }
-    }
-
-    /* ── ANNOUNCEMENT BANNER ── */
-    .announcement-bar {
-      background: var(--black);
-      color: var(--white);
-      text-align: center;
-      padding: 10px 20px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-    }
-    .announcement-bar a {
-      color: var(--lime);
-      text-decoration: none;
-      font-weight: 700;
-    }
-    .announcement-bar a:hover { text-decoration: underline; }
-
-    /* ── HAMBURGER MOBILE NAV ── */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--black);
-      border-radius: 2px;
-      transition: all 0.25s;
-    }
-    .nav-links.open {
-      display: flex !important;
-    }
-    @media (max-width: 768px) {
       .hamburger { display: flex; }
       .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--lime);
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 16px 24px 24px;
-        gap: 16px;
-        border-bottom: 2px solid rgba(0,0,0,0.1);
-        z-index: 200;
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--lime); flex-direction: column;
+        align-items: flex-start; padding: 16px 24px 24px; gap: 16px;
+        border-bottom: 2px solid rgba(0,0,0,0.1); z-index: 200;
       }
+      .nav-links.open { display: flex; }
       .nav-links li { width: 100%; }
       .dropdown-menu {
-        position: static;
-        transform: none;
-        box-shadow: none;
-        border: none;
-        background: transparent;
-        padding: 4px 0 0 12px;
-        display: block !important;
+        position: static; transform: none; box-shadow: none;
+        border: none; background: transparent; padding: 4px 0 0 12px; display: block !important;
       }
-      .dropdown-menu a { font-size: 0.9rem; opacity: 0.8; }
+      .list-hero { padding: 40px 24px 50px; }
+      .list-section { padding: 24px 16px 40px; }
+      .company-card { flex-wrap: wrap; gap: 16px; }
+      .card-action { width: 100%; }
+      .raise-hand-btn { width: 100%; justify-content: center; }
+      .modal { padding: 24px 20px; }
+      .form-actions { flex-direction: column; }
     }
   </style>
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
-  <!-- ANNOUNCEMENT BANNER -->
   <div class="announcement-bar">
-    🚀 The 2026 Exceptional Startups List is coming soon — <a href="/newsletter/">subscribe to be notified</a>
+    🚀 The <strong>2026 Exceptional Startups List</strong> is here — <a href="/list-2026/">see the newest list</a>
   </div>
 
   <nav>
     <a class="nav-logo" href="/">
-      <img src="/images/favicon.svg" alt="Exceptional Startups" style="width:36px;height:36px;">
+      <img src="/images/favicon.svg" alt="Exceptional Startups">
     </a>
     <button class="hamburger" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -164,6 +345,7 @@
       <li class="dropdown">
         <span class="dropdown-toggle">List</span>
         <div class="dropdown-menu">
+          <a href="/list-2026/">2026 List</a>
           <a href="/list-2025/">2025 List</a>
           <a href="/list-2024/">2024 List</a>
         </div>
@@ -174,52 +356,439 @@
   </nav>
 
   <section class="list-hero">
-    <h1>Exceptional Startups 2024 List</h1>
-    <div class="stats">
-      <p><strong>130+ companies</strong> submitted by <strong>20+ leading VC firms</strong></p>
-      <p><strong>40%</strong> in Bay Area</p>
-      <p><strong>15%</strong> of companies in NYC</p>
-      <p><strong>15%</strong> of companies are Remote</p>
-      <p>The remaining companies are spread across UT, TX, Southern CA, Colorado, and a few international</p>
+    <h1>2024 Exceptional<br>Startups List</h1>
+    <div class="stats" id="hero-stats">
+      <p>Loading stats...</p>
     </div>
-    <p class="cta-note">Questions? DM <a href="https://twitter.com/thogge" target="_blank">@thogge</a></p>
+    <p class="cta-note">Scroll down to see the full list 👇 · Questions? DM <a href="https://twitter.com/thogge" target="_blank">@thogge</a></p>
   </section>
 
-  <section class="list-content">
-    <iframe
-      id="myIframe"
-      src="https://v0-new-project-dck7shfhvqk-i9g9a0.vercel.app/"
-      title="2024 Exceptional Startups List"
-      scrolling="no">
-    </iframe>
+  <section class="list-section">
+    <div class="list-header">
+      <h2>Exceptional Startups 2024</h2>
+      <div class="search-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" id="search-input" placeholder="Search startups...">
+      </div>
+      <div class="filters">
+        <select class="filter-select" id="sort-select">
+          <option value="name">Sort by: Name</option>
+          <option value="stage">Sort by: Stage</option>
+          <option value="location">Sort by: Region</option>
+        </select>
+        <select class="filter-select" id="stage-select">
+          <option value="">Stage</option>
+        </select>
+        <select class="filter-select" id="region-select">
+          <option value="">Region</option>
+        </select>
+      </div>
+      <p class="result-count" id="result-count">Loading...</p>
+    </div>
+    <div class="cards-list" id="cards-list">
+      <div class="loading-wrap">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading startups...</div>
+      </div>
+    </div>
   </section>
+
+  <!-- COMPANY DETAIL MODAL -->
+  <div class="modal-overlay" id="detail-modal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeDetail()" aria-label="Close">&#215;</button>
+      <div class="detail-logo" id="detail-logo"></div>
+      <div class="detail-name" id="detail-name"></div>
+      <div class="detail-meta" id="detail-meta"></div>
+      <div class="detail-desc" id="detail-desc"></div>
+      <div class="detail-links" id="detail-links"></div>
+      <button class="modal-close-btn" onclick="closeDetail()">Close</button>
+    </div>
+  </div>
+
+  <!-- RAISE HAND MODAL -->
+  <div class="modal-overlay" id="rh-modal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeRH()" aria-label="Close">&#215;</button>
+      <div class="rh-header">
+        <div class="rh-logo" id="rh-logo"></div>
+        <div class="rh-title" id="rh-title"></div>
+      </div>
+      <div id="rh-form-wrap">
+        <form id="rh-form" onsubmit="submitRH(event)">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label>Email <span class="required-star">*</span></label>
+            <input type="email" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label>LinkedIn Profile</label>
+            <input type="url" name="linkedin" placeholder="https://linkedin.com/in/...">
+          </div>
+          <div class="form-group">
+            <label>Brief Overview of Experience</label>
+            <textarea name="experience" placeholder="Tell us about your background..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Interested Companies</label>
+            <input type="text" name="companies" id="rh-companies">
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" onclick="closeRH()">Cancel</button>
+            <button type="submit" class="btn-submit" id="rh-submit">Submit Interest</button>
+          </div>
+        </form>
+      </div>
+      <div class="form-success" id="rh-success">
+        <div class="success-icon">✅</div>
+        <h3>Interest Submitted!</h3>
+        <p>Thanks for raising your hand. We'll pass your info along.</p>
+        <button class="modal-close-btn" onclick="closeRH()" style="margin-top:16px;">Close</button>
+      </div>
+    </div>
+  </div>
 
   <footer>
-    <p>© 2026 Exceptional Startups · Questions? DM <a href="https://twitter.com/thogge" target="_blank">@thogge</a></p>
+    <p>&copy; 2024 Exceptional Startups · Questions? DM <a href="https://twitter.com/thogge" target="_blank">@thogge</a></p>
   </footer>
 
   <script>
-    window.addEventListener("message", function(event) {
-      if (event.data && event.data.iframeHeight) {
-        document.getElementById("myIframe").style.height = event.data.iframeHeight + "px";
-      }
-    });
-  </script>
+    // ── CONFIG ──
+    var SHEET_ID = '15VJo6dCI6xfDakE_F0aODg39S0_FiGmn4su02iQYZrw';
+    var GID = '1462900056';
+    var LIST_YEAR = '2024';
+    var CSV_URL = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:csv&gid=' + GID;
+    var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyVVEmY2VmEA0TKqyYcbrWMV6upMZhIGp-lvwzFYousbxFlNVlDB4Z1_c4nZ5tndi1dxQ/exec';
 
-  <script>
-    // Dropdown toggle
-    document.querySelectorAll('.dropdown-toggle').forEach(function(toggle) {
-      toggle.addEventListener('click', function(e) {
+    // ── STATE ──
+    var COMPANIES = [];
+    var filtered = [];
+    var activeCompany = null;
+
+    // ── CSV PARSER ──
+    // Handles quoted fields with commas, newlines, and escaped quotes
+    function parseCSV(text) {
+      var rows = [];
+      var row = [];
+      var field = '';
+      var inQuotes = false;
+      for (var i = 0; i < text.length; i++) {
+        var ch = text[i];
+        if (inQuotes) {
+          if (ch === '"') {
+            if (text[i + 1] === '"') { field += '"'; i++; }
+            else { inQuotes = false; }
+          } else {
+            field += ch;
+          }
+        } else {
+          if (ch === '"') { inQuotes = true; }
+          else if (ch === ',') { row.push(field.trim()); field = ''; }
+          else if (ch === '\n' || (ch === '\r' && text[i + 1] === '\n')) {
+            row.push(field.trim()); field = '';
+            if (row.length > 1 || row[0] !== '') rows.push(row);
+            row = [];
+            if (ch === '\r') i++;
+          } else {
+            field += ch;
+          }
+        }
+      }
+      if (field || row.length) { row.push(field.trim()); rows.push(row); }
+      return rows;
+    }
+
+    // ── COLUMN MAPPING ──
+    // Normalizes different header names across sheet tabs
+    var COL_MAP = {
+      'name': 'name',
+      'url': 'website', 'website': 'website',
+      'geography': 'location', 'location': 'location',
+      'stage': 'stage',
+      'description': 'description',
+      'logo': 'logo', 'logos': 'logo',
+      'careers page': 'careers', 'career pages': 'careers', 'careers': 'careers'
+    };
+
+    // ── LOAD DATA ──
+    function loadData() {
+      fetch(CSV_URL)
+        .then(function(r) { return r.text(); })
+        .then(function(csv) {
+          var rows = parseCSV(csv);
+          if (rows.length < 2) throw new Error('No data');
+
+          var headers = rows[0].map(function(h) { return h.toLowerCase().trim(); });
+          var colIdx = {};
+          headers.forEach(function(h, i) {
+            var mapped = COL_MAP[h];
+            if (mapped && colIdx[mapped] === undefined) colIdx[mapped] = i;
+          });
+
+          COMPANIES = rows.slice(1).map(function(row) {
+            return {
+              name: (row[colIdx.name] || '').trim(),
+              website: (row[colIdx.website] || '').trim(),
+              location: (row[colIdx.location] || '').trim(),
+              stage: (row[colIdx.stage] || '').trim(),
+              description: (row[colIdx.description] || '').trim(),
+              logo: (row[colIdx.logo] || '').trim(),
+              careers: (row[colIdx.careers] || '').trim()
+            };
+          }).filter(function(c) { return c.name.length > 0; });
+
+          buildFilters();
+          buildStats();
+          filtered = COMPANIES.slice();
+          applyFilters();
+        })
+        .catch(function(err) {
+          document.getElementById('cards-list').innerHTML = '<p class="error-text">Failed to load startup data. Please refresh the page to try again.</p>';
+          document.getElementById('result-count').textContent = '';
+          console.error('Sheet fetch error:', err);
+        });
+    }
+
+    // ── BUILD FILTER OPTIONS DYNAMICALLY ──
+    function buildFilters() {
+      var stages = {};
+      var regions = {};
+      COMPANIES.forEach(function(c) {
+        if (c.stage) stages[c.stage] = true;
+        if (c.location) regions[c.location] = true;
+      });
+
+      var stageSelect = document.getElementById('stage-select');
+      stageSelect.innerHTML = '<option value="">Stage</option>';
+      Object.keys(stages).sort().forEach(function(s) {
+        stageSelect.innerHTML += '<option value="' + escHtml(s) + '">' + escHtml(s) + '</option>';
+      });
+
+      var regionSelect = document.getElementById('region-select');
+      regionSelect.innerHTML = '<option value="">Region</option>';
+      Object.keys(regions).sort().forEach(function(r) {
+        regionSelect.innerHTML += '<option value="' + escHtml(r) + '">' + escHtml(r) + '</option>';
+      });
+    }
+
+    // ── BUILD HERO STATS DYNAMICALLY ──
+    function buildStats() {
+      var total = COMPANIES.length;
+      var stageCounts = {};
+      var regionCounts = {};
+      COMPANIES.forEach(function(c) {
+        if (c.stage) stageCounts[c.stage] = (stageCounts[c.stage] || 0) + 1;
+        if (c.location) regionCounts[c.location] = (regionCounts[c.location] || 0) + 1;
+      });
+
+      // Find top region
+      var topRegion = '';
+      var topRegionCount = 0;
+      Object.keys(regionCounts).forEach(function(r) {
+        if (regionCounts[r] > topRegionCount) {
+          topRegion = r;
+          topRegionCount = regionCounts[r];
+        }
+      });
+      var topRegionPct = Math.round((topRegionCount / total) * 100);
+
+      // Find top two stages
+      var stageArr = Object.keys(stageCounts).map(function(s) {
+        return { name: s, count: stageCounts[s] };
+      }).sort(function(a, b) { return b.count - a.count; });
+
+      var statsHTML = '<p><strong>' + total + ' companies</strong> on this year\'s list</p>';
+      if (topRegion) {
+        statsHTML += '<p><strong>' + topRegionPct + '%</strong> of companies are in ' + escHtml(topRegion) + '</p>';
+      }
+      if (stageArr.length >= 2) {
+        statsHTML += '<p><strong>' + Math.round((stageArr[0].count / total) * 100) + '%</strong> are ' + escHtml(stageArr[0].name) + ', <strong>' + Math.round((stageArr[1].count / total) * 100) + '%</strong> ' + escHtml(stageArr[1].name) + '</p>';
+      }
+
+      document.getElementById('hero-stats').innerHTML = statsHTML;
+    }
+
+    // ── LOGO COLORS ──
+    var COLORS = ['#4f46e5','#0891b2','#059669','#d97706','#dc2626','#7c3aed','#db2777','#ea580c'];
+    function logoColor(name) { return COLORS[name.charCodeAt(0) % COLORS.length]; }
+
+    function logoHTML(company) {
+      if (company.logo) {
+        return '<img src="' + company.logo + '" alt="' + escHtml(company.name) + '" style="width:100%;height:100%;object-fit:contain;" onload="scaleLogo(this)" onerror="this.parentElement.innerHTML=fallbackLogo(\'' + escHtml(company.name).replace(/'/g, "\\'") + '\')">';
+      }
+      return fallbackLogo(company.name);
+    }
+
+    function scaleLogo(img) {
+      var r = img.naturalWidth / (img.naturalHeight || 1);
+      if (r > 4)      img.style.transform = 'scale(1.9)';
+      else if (r > 3) img.style.transform = 'scale(1.7)';
+      else if (r > 2) img.style.transform = 'scale(1.5)';
+      else if (r > 1.5) img.style.transform = 'scale(1.25)';
+    }
+
+    function fallbackLogo(name) {
+      var color = logoColor(name);
+      return '<div class="logo-fallback" style="background:' + color + '">' + name[0].toUpperCase() + '</div>';
+    }
+
+    // ── RENDER ──
+    function render() {
+      var list = document.getElementById('cards-list');
+      var count = document.getElementById('result-count');
+      count.textContent = 'Showing ' + filtered.length + ' startup' + (filtered.length !== 1 ? 's' : '');
+
+      list.innerHTML = filtered.map(function(c, i) {
+        var idx = COMPANIES.indexOf(c);
+        return '<div class="company-card" onclick="openDetail(' + idx + ')">' +
+          '<div class="card-logo">' + logoHTML(c) + '</div>' +
+          '<div class="card-body">' +
+            '<div class="card-name">' + escHtml(c.name) + '</div>' +
+            '<div class="card-meta">' + escHtml(c.location) + (c.stage ? ' · ' + escHtml(c.stage) : '') + '</div>' +
+            (c.description ? '<div class="card-desc">' + escHtml(c.description) + '</div>' : '') +
+          '</div>' +
+          '<div class="card-action">' +
+            '<button class="raise-hand-btn" onclick="event.stopPropagation();openRH(' + idx + ')">' +
+              '<span class="hand-emoji">🤚</span> Raise Hand' +
+            '</button>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    function escHtml(str) {
+      return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    // ── FILTERS ──
+    function applyFilters() {
+      var q = document.getElementById('search-input').value.toLowerCase().trim();
+      var stage = document.getElementById('stage-select').value;
+      var region = document.getElementById('region-select').value;
+      var sort = document.getElementById('sort-select').value;
+
+      filtered = COMPANIES.filter(function(c) {
+        if (stage && c.stage !== stage) return false;
+        if (region && c.location !== region) return false;
+        if (q) {
+          var hay = (c.name + ' ' + c.description + ' ' + c.location + ' ' + c.stage).toLowerCase();
+          if (hay.indexOf(q) === -1) return false;
+        }
+        return true;
+      });
+
+      filtered.sort(function(a, b) {
+        var va = (a[sort] || '').toLowerCase();
+        var vb = (b[sort] || '').toLowerCase();
+        return va < vb ? -1 : va > vb ? 1 : 0;
+      });
+
+      render();
+    }
+
+    document.getElementById('search-input').addEventListener('input', applyFilters);
+    document.getElementById('sort-select').addEventListener('change', applyFilters);
+    document.getElementById('stage-select').addEventListener('change', applyFilters);
+    document.getElementById('region-select').addEventListener('change', applyFilters);
+
+    // ── DETAIL MODAL ──
+    function openDetail(idx) {
+      var c = COMPANIES[idx];
+      activeCompany = c;
+      document.getElementById('detail-logo').innerHTML = logoHTML(c);
+      document.getElementById('detail-name').textContent = c.name;
+      document.getElementById('detail-meta').textContent = [c.location, c.stage].filter(Boolean).join(' · ');
+      document.getElementById('detail-desc').textContent = c.description;
+      var links = document.getElementById('detail-links');
+      links.innerHTML = '';
+      if (c.website) {
+        links.innerHTML += '<a class="detail-link" href="' + (c.website.indexOf('http') === 0 ? c.website : 'https://' + c.website) + '" target="_blank" rel="noopener">Visit Website ↗</a>';
+      }
+      if (c.careers) {
+        links.innerHTML += '<a class="detail-link" href="' + (c.careers.indexOf('http') === 0 ? c.careers : 'https://' + c.careers) + '" target="_blank" rel="noopener">View Careers ↗</a>';
+      }
+      document.getElementById('detail-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDetail() {
+      document.getElementById('detail-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ── RAISE HAND MODAL ──
+    function openRH(idx) {
+      var c = COMPANIES[idx];
+      activeCompany = c;
+      document.getElementById('rh-logo').innerHTML = logoHTML(c);
+      document.getElementById('rh-title').textContent = 'Express Interest in ' + c.name;
+      document.getElementById('rh-companies').value = c.name;
+      document.getElementById('rh-form').reset();
+      document.getElementById('rh-companies').value = c.name;
+      document.getElementById('rh-form-wrap').style.display = '';
+      document.getElementById('rh-success').style.display = 'none';
+      document.getElementById('rh-submit').disabled = false;
+      document.getElementById('rh-submit').textContent = 'Submit Interest';
+      document.getElementById('rh-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeRH() {
+      document.getElementById('rh-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    async function submitRH(e) {
+      e.preventDefault();
+      var btn = document.getElementById('rh-submit');
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+
+      var form = document.getElementById('rh-form');
+      var data = {
+        name: form.name.value,
+        email: form.email.value,
+        linkedin: form.linkedin.value,
+        experience: form.experience.value,
+        companies: form.companies.value,
+        list: LIST_YEAR
+      };
+
+      try {
+        var params = new URLSearchParams(data);
+        await fetch(FORM_ENDPOINT + '?' + params.toString(), {
+          method: 'GET',
+          mode: 'no-cors'
+        });
+        document.getElementById('rh-form-wrap').style.display = 'none';
+        document.getElementById('rh-success').style.display = 'block';
+      } catch(err) {
+        btn.disabled = false;
+        btn.textContent = 'Submit Interest';
+        alert('Something went wrong. Please try again.');
+      }
+    }
+
+    // Close modals on overlay click
+    document.getElementById('detail-modal').addEventListener('click', function(e) { if (e.target === this) closeDetail(); });
+    document.getElementById('rh-modal').addEventListener('click', function(e) { if (e.target === this) closeRH(); });
+
+    // Nav dropdown
+    document.querySelectorAll('.dropdown-toggle').forEach(function(t) {
+      t.addEventListener('click', function(e) {
         e.stopPropagation();
-        var menu = this.nextElementSibling;
-        menu.classList.toggle('open');
+        t.nextElementSibling.classList.toggle('open');
       });
     });
     document.addEventListener('click', function() {
-      document.querySelectorAll('.dropdown-menu').forEach(function(m) {
-        m.classList.remove('open');
-      });
+      document.querySelectorAll('.dropdown-menu').forEach(function(m) { m.classList.remove('open'); });
     });
+
+    // ── INIT ──
+    loadData();
   </script>
 </body>
 </html>
