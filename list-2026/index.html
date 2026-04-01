@@ -109,6 +109,58 @@
     }
     .filter-select:focus { border-color: var(--black); }
 
+    /* MULTI-SELECT REGION FILTER */
+    .multi-select {
+      position: relative; display: inline-block;
+    }
+    .multi-select-toggle {
+      padding: 8px 32px 8px 14px;
+      border: 1.5px solid #d1d5db; border-radius: 50px;
+      font-family: var(--font); font-size: 0.88rem; font-weight: 500;
+      background: var(--white); cursor: pointer; outline: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      transition: border-color 0.2s;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .multi-select-toggle:hover,
+    .multi-select-toggle.active { border-color: var(--black); }
+    .multi-select-toggle .tag-count {
+      display: inline-block;
+      background: var(--black); color: var(--white);
+      font-size: 0.72rem; font-weight: 700;
+      padding: 1px 7px; border-radius: 50px;
+      margin-left: 6px; vertical-align: middle;
+    }
+    .multi-select-dropdown {
+      display: none; position: absolute; top: calc(100% + 6px); left: 0;
+      background: var(--white); border: 1.5px solid #d1d5db; border-radius: 12px;
+      min-width: 220px; max-height: 320px; overflow-y: auto;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12); z-index: 300;
+      padding: 6px 0;
+    }
+    .multi-select-dropdown.open { display: block; }
+    .multi-select-dropdown label {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 16px; cursor: pointer;
+      font-size: 0.88rem; font-weight: 500;
+      transition: background 0.1s;
+    }
+    .multi-select-dropdown label:hover { background: var(--lime-light); }
+    .multi-select-dropdown input[type="checkbox"] {
+      width: 16px; height: 16px; accent-color: var(--black); cursor: pointer;
+    }
+    .multi-select-clear {
+      display: block; width: calc(100% - 16px); margin: 4px 8px 6px;
+      padding: 6px; border: none; border-radius: 8px;
+      background: #f3f4f6; font-family: var(--font); font-size: 0.82rem;
+      font-weight: 600; color: var(--gray); cursor: pointer;
+      transition: background 0.15s;
+    }
+    .multi-select-clear:hover { background: #e5e7eb; }
+
     .result-count { font-size: 0.9rem; color: var(--gray); margin-bottom: 20px; }
 
     /* CARDS */
@@ -381,9 +433,10 @@
         <select class="filter-select" id="stage-select">
           <option value="">Stage</option>
         </select>
-        <select class="filter-select" id="region-select">
-          <option value="">Region</option>
-        </select>
+        <div class="multi-select" id="region-multi-select">
+          <div class="multi-select-toggle" id="region-toggle">Region</div>
+          <div class="multi-select-dropdown" id="region-dropdown"></div>
+        </div>
       </div>
       <p class="result-count" id="result-count">Loading...</p>
     </div>
@@ -569,11 +622,44 @@
         stageSelect.innerHTML += '<option value="' + escHtml(s) + '">' + escHtml(s) + '</option>';
       });
 
-      var regionSelect = document.getElementById('region-select');
-      regionSelect.innerHTML = '<option value="">Region</option>';
+      var regionDropdown = document.getElementById('region-dropdown');
+      var regionHTML = '';
       Object.keys(regions).sort().forEach(function(r) {
-        regionSelect.innerHTML += '<option value="' + escHtml(r) + '">' + escHtml(r) + '</option>';
+        regionHTML += '<label><input type="checkbox" value="' + escHtml(r) + '"> ' + escHtml(r) + '</label>';
       });
+      regionHTML += '<button class="multi-select-clear" id="region-clear">Clear all</button>';
+      regionDropdown.innerHTML = regionHTML;
+
+      // Wire up checkbox change events
+      regionDropdown.querySelectorAll('input[type="checkbox"]').forEach(function(cb) {
+        cb.addEventListener('change', function() {
+          updateRegionToggle();
+          applyFilters();
+        });
+      });
+      document.getElementById('region-clear').addEventListener('click', function() {
+        regionDropdown.querySelectorAll('input[type="checkbox"]').forEach(function(cb) { cb.checked = false; });
+        updateRegionToggle();
+        applyFilters();
+      });
+    }
+
+    function getSelectedRegions() {
+      var selected = [];
+      document.querySelectorAll('#region-dropdown input[type="checkbox"]:checked').forEach(function(cb) {
+        selected.push(cb.value);
+      });
+      return selected;
+    }
+
+    function updateRegionToggle() {
+      var selected = getSelectedRegions();
+      var toggle = document.getElementById('region-toggle');
+      if (selected.length === 0) {
+        toggle.textContent = 'Region';
+      } else {
+        toggle.innerHTML = 'Region <span class="tag-count">' + selected.length + '</span>';
+      }
     }
 
     // ── BUILD HERO STATS DYNAMICALLY ──
@@ -679,12 +765,12 @@
     function applyFilters() {
       var q = document.getElementById('search-input').value.toLowerCase().trim();
       var stage = document.getElementById('stage-select').value;
-      var region = document.getElementById('region-select').value;
+      var selectedRegions = getSelectedRegions();
       var sort = document.getElementById('sort-select').value;
 
       filtered = COMPANIES.filter(function(c) {
         if (stage && c.stage !== stage) return false;
-        if (region && c.location !== region) return false;
+        if (selectedRegions.length > 0 && selectedRegions.indexOf(c.location) === -1) return false;
         if (q) {
           var hay = (c.name + ' ' + c.description + ' ' + c.location + ' ' + c.stage).toLowerCase();
           if (hay.indexOf(q) === -1) return false;
@@ -704,7 +790,24 @@
     document.getElementById('search-input').addEventListener('input', applyFilters);
     document.getElementById('sort-select').addEventListener('change', applyFilters);
     document.getElementById('stage-select').addEventListener('change', applyFilters);
-    document.getElementById('region-select').addEventListener('change', applyFilters);
+
+    // Region multi-select toggle
+    document.getElementById('region-toggle').addEventListener('click', function(e) {
+      e.stopPropagation();
+      var dropdown = document.getElementById('region-dropdown');
+      var toggle = document.getElementById('region-toggle');
+      var isOpen = dropdown.classList.contains('open');
+      dropdown.classList.toggle('open');
+      toggle.classList.toggle('active');
+    });
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      var ms = document.getElementById('region-multi-select');
+      if (!ms.contains(e.target)) {
+        document.getElementById('region-dropdown').classList.remove('open');
+        document.getElementById('region-toggle').classList.remove('active');
+      }
+    });
 
     // ── DETAIL MODAL ──
     function openDetail(idx) {
