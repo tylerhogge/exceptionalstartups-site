@@ -296,6 +296,23 @@
     .form-success h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; }
     .form-success p { color: var(--gray); font-size: 0.95rem; }
 
+    /* BACK TO TOP */
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px;
+      width: 44px; height: 44px;
+      background: var(--black); color: var(--white);
+      border: none; border-radius: 50%;
+      font-size: 1.2rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s, transform 0.25s;
+      transform: translateY(8px);
+      z-index: 90;
+    }
+    .back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .back-to-top:hover { background: #1e293b; transform: translateY(-2px); }
+
     /* FOOTER */
     footer { background: var(--black); color: var(--white); text-align: center; padding: 24px 40px; font-size: 0.8rem; }
     footer a { color: var(--lime); text-decoration: none; }
@@ -318,6 +335,7 @@
       }
       .list-hero { padding: 40px 24px 50px; }
       .list-section { padding: 24px 16px 40px; }
+      .back-to-top { bottom: 20px; right: 20px; }
       .company-card { flex-wrap: wrap; gap: 16px; }
       .card-action { width: 100%; }
       .raise-hand-btn { width: 100%; justify-content: center; }
@@ -452,6 +470,8 @@
       </div>
     </div>
   </div>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
 
   <footer>
     <p>&copy; 2026 Exceptional Startups · Questions? DM <a href="https://twitter.com/thogge" target="_blank">@thogge</a></p>
@@ -795,6 +815,19 @@
     });
     document.addEventListener('click', function() {
       document.querySelectorAll('.dropdown-menu').forEach(function(m) { m.classList.remove('open'); });
+    });
+
+    // ── BACK TO TOP ──
+    var backToTopBtn = document.getElementById('back-to-top');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 600) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+    backToTopBtn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     // ── INIT ──
