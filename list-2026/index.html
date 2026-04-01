@@ -617,9 +617,19 @@
     var COLORS = ['#4f46e5','#0891b2','#059669','#d97706','#dc2626','#7c3aed','#db2777','#ea580c'];
     function logoColor(name) { return COLORS[name.charCodeAt(0) % COLORS.length]; }
 
+    function getLogoDomain(company) {
+      try {
+        var url = company.website || '';
+        if (url.indexOf('http') !== 0) url = 'https://' + url;
+        return new URL(url).hostname.replace('www.', '');
+      } catch(e) { return ''; }
+    }
+
     function logoHTML(company) {
-      if (company.logo) {
-        return '<img src="' + company.logo + '" alt="' + escHtml(company.name) + '" style="width:100%;height:100%;object-fit:contain;" onload="scaleLogo(this)" onerror="this.parentElement.innerHTML=fallbackLogo(\'' + escHtml(company.name).replace(/'/g, "\\'") + '\')">';
+      var domain = getLogoDomain(company);
+      if (domain) {
+        var src = 'https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://' + domain + '&size=128';
+        return '<img src="' + src + '" alt="' + escHtml(company.name) + '" style="width:100%;height:100%;object-fit:contain;border-radius:4px;" onerror="this.parentElement.innerHTML=fallbackLogo(\'' + escHtml(company.name).replace(/'/g, "\\'") + '\')">';
       }
       return fallbackLogo(company.name);
     }
