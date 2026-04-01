@@ -688,12 +688,27 @@
         return { name: s, count: stageCounts[s] };
       }).sort(function(a, b) { return b.count - a.count; });
 
+      // Find top 5 regions
+      var regionArr = Object.keys(regionCounts).map(function(r) {
+        return { name: r, count: regionCounts[r] };
+      }).sort(function(a, b) { return b.count - a.count; });
+      var top5 = regionArr.slice(0, 5).map(function(r) { return r.name; });
+
+      // Europe count
+      var europeCount = regionCounts['Europe'] || 0;
+
       var statsHTML = '<p><strong>' + total + ' companies</strong> on this year\'s list</p>';
       if (topRegion) {
         statsHTML += '<p><strong>' + topRegionPct + '%</strong> of companies are in ' + escHtml(topRegion) + '</p>';
       }
       if (stageArr.length >= 2) {
         statsHTML += '<p><strong>' + Math.round((stageArr[0].count / total) * 100) + '%</strong> are ' + escHtml(stageArr[0].name) + ', <strong>' + Math.round((stageArr[1].count / total) * 100) + '%</strong> ' + escHtml(stageArr[1].name) + '</p>';
+      }
+      if (top5.length >= 5) {
+        statsHTML += '<p><strong>Top 5 regions:</strong> ' + top5.map(escHtml).join(', ') + '</p>';
+      }
+      if (europeCount > 0) {
+        statsHTML += '<p><strong>' + europeCount + ' European companies</strong>, up from 2 in 2024</p>';
       }
 
       document.getElementById('hero-stats').innerHTML = statsHTML;
