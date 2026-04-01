@@ -163,6 +163,42 @@
 
     .result-count { font-size: 0.9rem; color: var(--gray); margin-bottom: 20px; }
 
+    /* STICKY FILTERS */
+    .sticky-filters {
+      position: sticky; top: 64px; z-index: 50;
+      background: var(--bg);
+      padding: 16px 0 0;
+      margin: 0 -40px; padding-left: 40px; padding-right: 40px;
+    }
+    .sticky-filters::after {
+      content: ''; display: block;
+      height: 1px; background: linear-gradient(to right, transparent, #d1d5db, transparent);
+      margin-top: 12px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .sticky-filters.stuck::after { opacity: 1; }
+
+    /* BACK TO TOP */
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px;
+      width: 44px; height: 44px;
+      background: var(--black); color: var(--white);
+      border: none; border-radius: 50%;
+      font-size: 1.2rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s, transform 0.25s;
+      transform: translateY(8px);
+      z-index: 90;
+    }
+    .back-to-top.visible {
+      opacity: 1; pointer-events: auto;
+      transform: translateY(0);
+    }
+    .back-to-top:hover { background: #1e293b; transform: translateY(-2px); }
+
     /* CARDS */
     .cards-list { display: flex; flex-direction: column; gap: 12px; }
 
@@ -370,6 +406,8 @@
       }
       .list-hero { padding: 40px 24px 50px; }
       .list-section { padding: 24px 16px 40px; }
+      .sticky-filters { margin: 0 -16px; padding-left: 16px; padding-right: 16px; top: 56px; }
+      .back-to-top { bottom: 20px; right: 20px; }
       .company-card { flex-wrap: wrap; gap: 16px; }
       .card-action { width: 100%; }
       .raise-hand-btn { width: 100%; justify-content: center; }
@@ -403,7 +441,7 @@
         </div>
       </li>
       <li><a href="/about/">About</a></li>
-      <li><a href="/newsletter/">Get Notified</a></li>
+      <li><a href="/newsletter/">Stay Updated</a></li>
     </ul>
   </nav>
 
@@ -418,27 +456,30 @@
   <section class="list-section">
     <div class="list-header">
       <h2>Exceptional Startups 2026</h2>
-      <div class="search-wrap">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-        <input type="text" id="search-input" placeholder="Search startups...">
-      </div>
-      <div class="filters">
-        <select class="filter-select" id="sort-select">
-          <option value="name">Sort by: Name</option>
-          <option value="stage">Sort by: Stage</option>
-          <option value="location">Sort by: Region</option>
-        </select>
-        <select class="filter-select" id="stage-select">
-          <option value="">Stage</option>
-        </select>
-        <div class="multi-select" id="region-multi-select">
-          <div class="multi-select-toggle" id="region-toggle">Region</div>
-          <div class="multi-select-dropdown" id="region-dropdown"></div>
+      <div class="sticky-filters" id="sticky-filters">
+        <div class="search-wrap">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="text" id="search-input" placeholder="Search startups...">
         </div>
+        <div class="filters">
+          <select class="filter-select" id="sort-select">
+            <option value="name">Sort by: Name</option>
+            <option value="stage">Sort by: Stage</option>
+            <option value="location">Sort by: Region</option>
+          </select>
+          <div class="multi-select" id="stage-multi-select">
+            <div class="multi-select-toggle" id="stage-toggle">Stage</div>
+            <div class="multi-select-dropdown" id="stage-dropdown"></div>
+          </div>
+          <div class="multi-select" id="region-multi-select">
+            <div class="multi-select-toggle" id="region-toggle">Region</div>
+            <div class="multi-select-dropdown" id="region-dropdown"></div>
+          </div>
+        </div>
+        <p class="result-count" id="result-count">Loading...</p>
       </div>
-      <p class="result-count" id="result-count">Loading...</p>
     </div>
     <div class="cards-list" id="cards-list">
       <div class="loading-wrap">
@@ -505,6 +546,8 @@
       </div>
     </div>
   </div>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
 
   <footer>
     <p>&copy; 2026 Exceptional Startups · Questions? DM <a href="https://twitter.com/thogge" target="_blank">@thogge</a></p>
@@ -616,10 +659,25 @@
         if (c.location) regions[c.location] = true;
       });
 
-      var stageSelect = document.getElementById('stage-select');
-      stageSelect.innerHTML = '<option value="">Stage</option>';
+      var stageDropdown = document.getElementById('stage-dropdown');
+      var stageHTML = '';
       Object.keys(stages).sort().forEach(function(s) {
-        stageSelect.innerHTML += '<option value="' + escHtml(s) + '">' + escHtml(s) + '</option>';
+        stageHTML += '<label><input type="checkbox" value="' + escHtml(s) + '"> ' + escHtml(s) + '</label>';
+      });
+      stageHTML += '<button class="multi-select-clear" id="stage-clear">Clear all</button>';
+      stageDropdown.innerHTML = stageHTML;
+
+      // Wire up stage checkbox change events
+      stageDropdown.querySelectorAll('input[type="checkbox"]').forEach(function(cb) {
+        cb.addEventListener('change', function() {
+          updateStageToggle();
+          applyFilters();
+        });
+      });
+      document.getElementById('stage-clear').addEventListener('click', function() {
+        stageDropdown.querySelectorAll('input[type="checkbox"]').forEach(function(cb) { cb.checked = false; });
+        updateStageToggle();
+        applyFilters();
       });
 
       var regionDropdown = document.getElementById('region-dropdown');
@@ -659,6 +717,24 @@
         toggle.textContent = 'Region';
       } else {
         toggle.innerHTML = 'Region <span class="tag-count">' + selected.length + '</span>';
+      }
+    }
+
+    function getSelectedStages() {
+      var selected = [];
+      document.querySelectorAll('#stage-dropdown input[type="checkbox"]:checked').forEach(function(cb) {
+        selected.push(cb.value);
+      });
+      return selected;
+    }
+
+    function updateStageToggle() {
+      var selected = getSelectedStages();
+      var toggle = document.getElementById('stage-toggle');
+      if (selected.length === 0) {
+        toggle.textContent = 'Stage';
+      } else {
+        toggle.innerHTML = 'Stage <span class="tag-count">' + selected.length + '</span>';
       }
     }
 
@@ -779,12 +855,12 @@
     // ── FILTERS ──
     function applyFilters() {
       var q = document.getElementById('search-input').value.toLowerCase().trim();
-      var stage = document.getElementById('stage-select').value;
+      var selectedStages = getSelectedStages();
       var selectedRegions = getSelectedRegions();
       var sort = document.getElementById('sort-select').value;
 
       filtered = COMPANIES.filter(function(c) {
-        if (stage && c.stage !== stage) return false;
+        if (selectedStages.length > 0 && selectedStages.indexOf(c.stage) === -1) return false;
         if (selectedRegions.length > 0 && selectedRegions.indexOf(c.location) === -1) return false;
         if (q) {
           var hay = (c.name + ' ' + c.description + ' ' + c.location + ' ' + c.stage).toLowerCase();
@@ -804,25 +880,65 @@
 
     document.getElementById('search-input').addEventListener('input', applyFilters);
     document.getElementById('sort-select').addEventListener('change', applyFilters);
-    document.getElementById('stage-select').addEventListener('change', applyFilters);
+
+    // Stage multi-select toggle
+    document.getElementById('stage-toggle').addEventListener('click', function(e) {
+      e.stopPropagation();
+      // Close region if open
+      document.getElementById('region-dropdown').classList.remove('open');
+      document.getElementById('region-toggle').classList.remove('active');
+      document.getElementById('stage-dropdown').classList.toggle('open');
+      document.getElementById('stage-toggle').classList.toggle('active');
+    });
 
     // Region multi-select toggle
     document.getElementById('region-toggle').addEventListener('click', function(e) {
       e.stopPropagation();
-      var dropdown = document.getElementById('region-dropdown');
-      var toggle = document.getElementById('region-toggle');
-      var isOpen = dropdown.classList.contains('open');
-      dropdown.classList.toggle('open');
-      toggle.classList.toggle('active');
+      // Close stage if open
+      document.getElementById('stage-dropdown').classList.remove('open');
+      document.getElementById('stage-toggle').classList.remove('active');
+      document.getElementById('region-dropdown').classList.toggle('open');
+      document.getElementById('region-toggle').classList.toggle('active');
     });
-    // Close dropdown when clicking outside
+
+    // Close dropdowns when clicking outside
     document.addEventListener('click', function(e) {
-      var ms = document.getElementById('region-multi-select');
-      if (!ms.contains(e.target)) {
+      var stageMSel = document.getElementById('stage-multi-select');
+      var regionMSel = document.getElementById('region-multi-select');
+      if (!stageMSel.contains(e.target)) {
+        document.getElementById('stage-dropdown').classList.remove('open');
+        document.getElementById('stage-toggle').classList.remove('active');
+      }
+      if (!regionMSel.contains(e.target)) {
         document.getElementById('region-dropdown').classList.remove('open');
         document.getElementById('region-toggle').classList.remove('active');
       }
     });
+
+    // ── BACK TO TOP ──
+    var backToTopBtn = document.getElementById('back-to-top');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 600) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+    backToTopBtn.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ── STICKY FILTERS "STUCK" CLASS ──
+    var stickyEl = document.getElementById('sticky-filters');
+    var stickyObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        // When the sentinel is not intersecting, the filters are stuck
+        stickyEl.classList.toggle('stuck', !entry.isIntersecting);
+      });
+    }, { threshold: 0, rootMargin: '-65px 0px 0px 0px' });
+    // Observe the list header (element just above sticky filters)
+    var stickyAnchor = document.querySelector('.list-header h2');
+    if (stickyAnchor) stickyObserver.observe(stickyAnchor);
 
     // ── DETAIL MODAL ──
     function openDetail(idx) {
